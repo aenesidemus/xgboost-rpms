@@ -1,0 +1,20 @@
+diff -uNr xgboost-0.40-orig/Makefile xgboost-0.40/Makefile
+--- xgboost-0.40-orig/Makefile	2015-11-24 05:56:05.472813447 +0200
++++ xgboost-0.40/Makefile	2015-11-24 13:06:07.808215082 +0200
+@@ -52,6 +52,7 @@
+ OBJ = updater.o gbm.o io.o main.o dmlc_simple.o
+ MPIBIN =
+ TARGET = $(BIN) $(OBJ) $(SLIB)
++INSTALL_PATH = /usr/bin
+ 
+ .PHONY: clean all mpi python Rpack
+ 
+@@ -97,7 +98,7 @@
+ 	$(MPICXX) $(CFLAGS) -o $@ $(filter %.cpp %.o %.c %.cc %.a, $^) $(LDFLAGS) 
+ 
+ install:
+-	cp -f -r $(BIN)  $(INSTALL_PATH)
++	cp -f -r --parents $(BIN)  $(DESTDIR)$(INSTALL_PATH)
+ 
+ Rpack:
+ 	make clean
